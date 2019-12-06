@@ -1,6 +1,8 @@
 import jwt from 'jsonwebtoken';
 import * as Yup from 'yup';
+
 import User from '../models/User';
+import Student from '../models/Student';
 
 import authConfig from '../../config/auth';
 
@@ -41,6 +43,15 @@ class SessionController {
         expiresIn: authConfig.expiresIn,
       }),
     });
+  }
+
+  async index(req, res){
+    const student = await Student.findByPk(req.params.id);
+    // check this student there is
+    if (!student) {
+      return res.status(400).json({ error: 'Student does not exists' });
+    }
+    return res.json(student);
   }
 }
 

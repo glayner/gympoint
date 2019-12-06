@@ -39,6 +39,7 @@ class CheckinController {
     }
     const checkins = await Checkin.findAll({
       where: { student_id: student.id },
+      order: [['createdAt', 'DESC']],
     });
     return res.json(checkins);
   }

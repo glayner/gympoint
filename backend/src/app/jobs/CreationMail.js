@@ -14,7 +14,7 @@ class CreationMail {
       subject: 'Matricula realizada',
       template: 'creation',
       context: {
-        // logo,
+        id: student.id,
         student: student.name,
         plan: plan.title,
         plan_price: plan.price,
