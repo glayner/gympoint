@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { signOut } from '~/store/modules/auth/actions';
 import { toast } from 'react-toastify';
 import ReactModal from 'react-modal';
-import { Input, Form } from '@rocketseat/unform';
+
 import {
   MdKeyboardArrowRight,
   MdKeyboardArrowLeft,
@@ -14,7 +14,7 @@ import * as Yup from 'yup';
 import api from '~/services/api';
 
 import { Container, Cover, Title, Content, Pagination } from '~/styles/default';
-import { ModalContainer } from './styles';
+import { ModalContainer, ModalContent, ModalForm,AnswerSize, ModalInput } from './styles';
 
 const schema = Yup.object().shape({
   answer: Yup.string()
@@ -33,6 +33,8 @@ export default function Suport() {
   const [prevDisable, setPrevDisable] = useState(true);
   const [nextDisable, setNextDisable] = useState(false);
 
+  const [answer, setAnswer] = useState('');
+
   const customStyles = {
     content: {
       top: '50%',
@@ -43,6 +45,10 @@ export default function Suport() {
       transform: 'translate(-50%, -50%)'
     }
   };
+
+  const answerSize = useMemo(() => {
+    return 255 - answer.length;
+  }, [answer])
 
   async function loadSuport() {
     try {
@@ -182,14 +188,14 @@ export default function Suport() {
         ariaHideApp={false}
       >
         <ModalContainer>
-          <div>
+          <ModalContent>
             <strong>
               PERGUNTA DO ALUNO:{' '}
               <span>{modalHelpOrder ? modalHelpOrder.student.name : null}</span>
             </strong>
             <span> {modalHelpOrder ? modalHelpOrder.question : null}</span>
-          </div>
-          <Form
+          </ModalContent>
+          <ModalForm
             initialData={modalHelpOrder}
             schema={schema}
             onSubmit={handleSubmit}
@@ -197,11 +203,15 @@ export default function Suport() {
             <label>
               <strong>SUA RESPOSTA</strong>
 
-              <Input multiline name="answer" placeholder="Resposta..." />
+              <ModalInput
+                multiline name="answer"
+                onChange={e => setAnswer(e.target.value)}
+                placeholder="Resposta..."
+              />
             </label>
-
+            <AnswerSize limit={answerSize < 0}>{answerSize}/255</AnswerSize>
             <button type="submit">Responder aluno</button>
-          </Form>
+          </ModalForm>
         </ModalContainer>
       </ReactModal>
     </Container>

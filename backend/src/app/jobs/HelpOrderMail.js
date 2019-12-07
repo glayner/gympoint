@@ -9,7 +9,7 @@ class HelpOrderMail {
     const { helpOrder } = data;
     await Mail.sendMail({
       to: `${helpOrder.student.name} <${helpOrder.student.email}>`,
-      subject: 'Matricula realizada',
+      subject: 'Pedido de ajuda respondido',
       template: 'helpOrder',
       context: {
         student: helpOrder.student.name,

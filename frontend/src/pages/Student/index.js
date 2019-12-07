@@ -50,10 +50,7 @@ export default function Student() {
     loadStudents();
   }, [page]); // eslint-disable-line
 
-  function handleSearch({ nameSearch }) {
-    setName(nameSearch);
-    loadStudents();
-  }
+
 
   async function handleDelete(id) {
     try {
@@ -90,11 +87,11 @@ export default function Student() {
             <Link className="register" to="/studentregister">
               <MdAdd size={20} color="#FFF" /> <span> CADASTRAR</span>
             </Link>
-            <Form onSubmit={handleSearch}>
+            <Form onSubmit={loadStudents}>
               <button type="submit">
                 <MdSearch size={16} color="#999" />
               </button>
-              <Input name="nameSearch" placeholder="Buscar Aluno" />
+              <Input name="nameSearch"  onChange={e => setName(e.target.value)} placeholder="Buscar Aluno" />
             </Form>
           </Search>
         </Title>

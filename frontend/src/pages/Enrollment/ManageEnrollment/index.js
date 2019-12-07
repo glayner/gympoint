@@ -11,7 +11,8 @@ import {
   setMinutes,
   setSeconds,
   endOfSecond,
-  parseISO
+  parseISO,
+  startOfDay,
 } from 'date-fns';
 
 import pt from 'date-fns/locale/pt-BR';
@@ -133,15 +134,26 @@ export default function ManageEnrollment({ match }) {
   async function handleSubmit(data) {
     try {
       const dateNow = new Date();
-      const startDateNow = endOfSecond(
-        setSeconds(
-          setMinutes(
-            setHours(data.start_date, dateNow.getHours()),
-            dateNow.getMinutes()
-          ),
-          dateNow.getSeconds()
-        )
-      );
+
+      const dateNowComp = `${dateNow.getDate()}/${
+        dateNow.getMonth()+1}/${dateNow.getFullYear()}`;
+      const dateFormComp = `${data.start_date.getDate()}/${
+        data.start_date.getMonth()+1}/${data.start_date.getFullYear()}`;
+      let startDateNow
+
+      if(dateNowComp === dateFormComp){
+        startDateNow = endOfSecond(
+          setSeconds(
+            setMinutes(
+              setHours(data.start_date, dateNow.getHours()),
+              dateNow.getMinutes()
+            ),
+            dateNow.getSeconds()
+          )
+        );
+      }else {
+        startDateNow = startOfDay(data.start_date)
+      }
 
       let newData = {};
       if (!newDate) {
