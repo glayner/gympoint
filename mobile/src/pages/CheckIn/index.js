@@ -1,11 +1,12 @@
 import React, {useState, useEffect} from 'react';
 import {useSelector} from 'react-redux';
 import Toast from 'react-native-simple-toast';
+import Icon from 'react-native-vector-icons/MaterialIcons';
 
 import api from '~/services/api';
-
 import Background from '~/components/Background';
-import Checks from '~/components/Checks';
+
+import Checks from './Checks';
 
 import {Container, SubmitButton, List} from './styles';
 
@@ -44,3 +45,10 @@ export default function CheckIn() {
     </Background>
   );
 }
+
+CheckIn.navigationOptions = {
+  // eslint-disable-next-line react/prop-types
+  tabBarIcon: ({tintColor}) => (
+    <Icon name="edit-location" size={20} color={tintColor} />
+  ),
+};

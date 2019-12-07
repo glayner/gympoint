@@ -12,6 +12,7 @@ export default function Checks({data}) {
       addSuffix: true,
     });
   }, [data.createdAt]);
+
   return (
     <Container>
       <Text>Check-in #{data.id}</Text>

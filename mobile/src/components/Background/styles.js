@@ -6,7 +6,7 @@ import logohead from '~/assets/logohead.png';
 export const Header = styled.SafeAreaView`
   align-items: center;
   justify-content: center;
-  height: 46px;
+  height: 55px;
   background: #fff;
 `;
 
