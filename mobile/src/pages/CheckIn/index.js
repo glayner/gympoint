@@ -12,16 +12,45 @@ import {Container, SubmitButton, List} from './styles';
 
 export default function CheckIn() {
   const [checks, setChecks] = useState();
+  const [page, setPage] = useState(1);
+  const [refreshing, setRefreshing] = useState(false);
+  const [more, setMore] = useState(true);
+  const per_page = 10;
+
   const {id} = useSelector(state => state.user.profile);
 
   async function loadCheckIn() {
-    const response = await api.get(`students/${id}/checkins`);
-    setChecks(response.data);
+    if (more) {
+      const response = await api.get(`students/${id}/checkins`, {
+        params: {page, per_page},
+      });
+      if (response.data.length === 0) {
+        setMore(false);
+      } else {
+        const newChecks = checks
+          ? [...checks, ...response.data]
+          : response.data;
+
+        setChecks(newChecks);
+        setPage(page + 1);
+      }
+    }
   }
 
   useEffect(() => {
     loadCheckIn();
   }, []); // eslint-disable-line
+
+  async function handleRefreshing() {
+    setRefreshing(true);
+    const response = await api.get(`students/${id}/checkins`, {
+      params: {page, per_page},
+    });
+    setChecks(response.data);
+    setPage(2);
+    setMore(true);
+    setRefreshing(false);
+  }
 
   async function handleCheckIn() {
     try {
@@ -39,6 +68,10 @@ export default function CheckIn() {
         <List
           data={checks}
           keyExtractor={item => String(item.id)}
+          onRefresh={handleRefreshing}
+          onEndReacherdThreshold={0.2}
+          onEndReached={loadCheckIn}
+          refreshing={refreshing}
           renderItem={({item}) => <Checks data={item} />}
         />
       </Container>

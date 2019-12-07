@@ -11,12 +11,35 @@ import {Container, SubmitButton, List} from './styles';
 
 function Listing({navigation, isFocused}) {
   const [orders, setOrders] = useState();
+  const [page, setPage] = useState(1);
   const [refreshing, setRefreshing] = useState(false);
+  const [more, setMore] = useState(true);
   const {id} = useSelector(state => state.user.profile);
+  const per_page = 5;
+
+  async function loadMoreOrders() {
+    if (more) {
+      const response = await api.get(`students/${id}/help-orders`, {
+        params: {page, per_page},
+      });
+      if (response.data.length === 0) {
+        setMore(false);
+      } else {
+        const newOrder = orders ? [...orders, ...response.data] : response.data;
+
+        setOrders(newOrder);
+        setPage(page + 1);
+      }
+    }
+  }
 
   async function loadOrders() {
-    const response = await api.get(`students/${id}/help-orders`);
+    const response = await api.get(`students/${id}/help-orders`, {
+      params: {page: 1, per_page},
+    });
     setOrders(response.data);
+    setPage(2);
+    setMore(true);
   }
 
   useEffect(() => {
@@ -25,7 +48,7 @@ function Listing({navigation, isFocused}) {
     }
   }, [isFocused]); // eslint-disable-line
 
-  function handleRefreshing() {
+  async function handleRefreshing() {
     setRefreshing(true);
     loadOrders();
     setRefreshing(false);
@@ -42,6 +65,7 @@ function Listing({navigation, isFocused}) {
           keyExtractor={item => String(item.id)}
           onRefresh={handleRefreshing}
           onEndReacherdThreshold={0.2}
+          onEndReached={loadMoreOrders}
           refreshing={refreshing}
           renderItem={({item}) => (
             <ListOrders data={item} navigation={navigation} />
