@@ -7,13 +7,27 @@
 </h3>
 
 
-<p align="center">
-  <img alt="GitHub language count" src="https://img.shields.io/github/languages/count/rocketseat/bootcamp-gostack-desafio-09?color=%2304D361" />
+<p align = "center">
 
-  <a href="https://rocketseat.com.br">
-    <img alt="Challenge made by Rocketseat" src="https://img.shields.io/badge/made%20by-Rocketseat-%2304D361" />
-  </a>
+<img alt = "Última confirmação do Github" src = "https://img.shields.io/github/last-commit/glayner/gympoint">
 
-  <img alt="License" src="https://img.shields.io/badge/license-MIT-%2304D361" />
+<img alt = "Idioma principal do GitHub" src = "https://img.shields.io/github/languages/top/glayner/gympoint">
 
-</p>
+<img alt = "GitHub" src = "https://img.shields.io/github/license/glayner/gympoint.svg">
+</p>  
+
+# :gear:  Back-end
+
+## :tools: Tecnologias e ferramentas
+
+* Express;
+* Docker;
+* Sucrase + Nodemon;
+* ESLint + Prettier + EditorConfig;
+* Sequelize (PostgreSQL);
+* nodemailer + handlebars;
+* Bee Queue + Redis;
+* jsonwebtoken + bcryptjs + yup;
+* dotenv 
+* date-fns
+* Insomnia + postbird
