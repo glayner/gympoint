@@ -33,6 +33,7 @@ class HelpOrderController {
   }
 
   async index(req, res) {
+    const { page, per_page } = req.query;
     const student = await Student.findByPk(req.params.id);
     // check this student there is
     if (!student) {
@@ -41,6 +42,8 @@ class HelpOrderController {
     const helpOrder = await HelpOrder.findAll({
       where: { student_id: student.id },
       order: [['createdAt', 'DESC']],
+      limit: per_page,
+      offset: (page - 1) * per_page,
     });
     return res.json(helpOrder);
   }
