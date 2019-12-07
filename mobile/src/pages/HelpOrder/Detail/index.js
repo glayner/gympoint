@@ -57,7 +57,7 @@ Detail.navigationOptions = ({navigation}) => ({
       onPress={() => {
         navigation.navigate('Listing');
       }}>
-      <Icon name="chevron-left" size={24} color="#000" />
+      <Icon name="chevron-left" size={24} color="#ee4e62" />
     </TouchableOpacity>
   ),
 });
