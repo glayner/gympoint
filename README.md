@@ -17,7 +17,7 @@
 
 ## :information_source: Instruções
 
-Para clonar esse app voce precisa [Git](https://git-scm.com), [Node.js v10.16][nodejs] + [Yarn v1.13][yarn]. Para ele poder funcionar precisa de um banco [PostgreSQL](https://www.postgresql.org/) e [Redis](https://redis.io/) instalado e rodando na maquina podendo-se utilizar o [Docker](https://www.docker.com/).
+Para clonar esse app voce precisa [Git](https://git-scm.com), [Node.js v10.16](https://nodejs.org/) + [Yarn v1.13](https://yarnpkg.com/). Para ele poder funcionar precisa de um banco [PostgreSQL](https://www.postgresql.org/) e [Redis](https://redis.io/) instalado e rodando na maquina podendo-se utilizar o [Docker](https://www.docker.com/).
 
 ```bash
 # clone o arquivo do repositório
@@ -47,7 +47,7 @@ yarn queue
 ```
 ---
 # :computer: Front-end
-<small> testado no Google Chrome </small>
+<blockquote>testado no Google Chrome </blockquote>
 
 ## :information_source: Instruções
 
@@ -64,7 +64,7 @@ yarn start
 ---
 
 # :iphone: Mobile
-<small> testado no ANDROID </small>
+<blockquote> testado no ANDROID </blockquote>
 
 ```bash
 # entrar na pasta do mobile
