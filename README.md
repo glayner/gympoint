@@ -17,8 +17,7 @@
 
 ### :information_source: Instruções Back-end
 
-Para clonar esse app voce precisa [Git](https://git-scm.com), [Node.js v10.16](https://nodejs.org/) + [Yarn v1.13](https://yarnpkg.com/). Para ele poder funcionar precisa de um banco [PostgreSQL](https://www.postgresql.org/) e [Redis](https://redis.io/) instalado e rodando na maquina.
-<details><summary>Podendo utilizar esses bancos de dados no [Docker](https://www.docker.com/).</summary>
+Para clonar esse app voce precisa [Git](https://git-scm.com), [Node.js v10.16](https://nodejs.org/) + [Yarn v1.13](https://yarnpkg.com/). Para ele poder funcionar precisa de um banco [PostgreSQL](https://www.postgresql.org/) e [Redis](https://redis.io/) instalado e rodando na maquina <details><summary>podendo utilizar o [Docker](https://www.docker.com/).</summary>
 ```bash
 # instalar Redis
 docker run --name redisgympoint -p 6379:6379 -d -t redis:alpine
@@ -32,9 +31,7 @@ docker run --name database -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres:
 # inicializar PostgreSQL
 docker start database
 ```
-
 </details>
-
 
 ```bash
 # clone o arquivo do repositório
