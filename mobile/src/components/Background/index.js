@@ -15,7 +15,7 @@ export default function Background({children}) {
   return (
     <>
       <Header>
-          <Logo />
+        <Logo />
         <LogoutButton onPress={handleLogout}>
           <Icon name="exit-to-app" size={20} color="#ee4e62" />
         </LogoutButton>

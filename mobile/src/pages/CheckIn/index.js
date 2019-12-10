@@ -44,7 +44,7 @@ export default function CheckIn() {
   async function handleRefreshing() {
     setRefreshing(true);
     const response = await api.get(`students/${id}/checkins`, {
-      params: {page, per_page},
+      params: {page: 1, per_page},
     });
     setChecks(response.data);
     setPage(2);
@@ -55,7 +55,7 @@ export default function CheckIn() {
   async function handleCheckIn() {
     try {
       await api.post(`students/${id}/checkins`);
-      loadCheckIn();
+      handleRefreshing();
     } catch (err) {
       Toast.show(err.response.data.error, Toast.LONG);
     }
