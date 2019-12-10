@@ -11,6 +11,7 @@
 <img alt = "Última confirmação do Github" src = "https://img.shields.io/github/last-commit/glayner/gympoint">
 <img alt = "Idioma principal do GitHub" src = "https://img.shields.io/github/languages/top/glayner/gympoint">
 <img alt = "GitHub" src = "https://img.shields.io/github/license/glayner/gympoint.svg">
+<a href="https://www.codacy.com/manual/glayner/gympoint?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=glayner/gympoint&amp;utm_campaign=Badge_Grade"><img src="https://api.codacy.com/project/badge/Grade/147d0b2836734c79b7ee5ea035f065b4"/></a>
 </p>  
 
 ## :gear:  Back-end
