@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
-import { signOut } from '~/store/modules/auth/actions';
 import { toast } from 'react-toastify';
 import ReactModal from 'react-modal';
 
@@ -11,10 +10,11 @@ import {
 } from 'react-icons/md';
 
 import * as Yup from 'yup';
+import { signOut } from '~/store/modules/auth/actions';
 import api from '~/services/api';
 
 import { Container, Cover, Title, Content, Pagination } from '~/styles/default';
-import { ModalContainer, ModalContent, ModalForm,AnswerSize, ModalInput } from './styles';
+import { ModalContainer, ModalForm, AnswerSize, ModalInput } from './styles';
 
 const schema = Yup.object().shape({
   answer: Yup.string()
@@ -48,7 +48,7 @@ export default function Suport() {
 
   const answerSize = useMemo(() => {
     return 255 - answer.length;
-  }, [answer])
+  }, [answer]);
 
   async function loadSuport() {
     try {
@@ -66,7 +66,7 @@ export default function Suport() {
       if (e.response.data.error === 'Token invalid') {
         dispatch(signOut());
       } else {
-        toast.error(e.response.data.error)
+        toast.error(e.response.data.error);
       }
     }
   }
@@ -79,10 +79,11 @@ export default function Suport() {
     setModalHelpOrder(suport);
     setShowModal(true);
   }
+
   async function handleSubmit(data) {
     try {
       const { id } = modalHelpOrder;
-      console.tron.log(`id: ${id}`);
+
       await api.post(`/students/help-orders/${id}/answer`, {
         ...data
       });
@@ -90,7 +91,6 @@ export default function Suport() {
       setShowModal(false);
       loadSuport();
     } catch (error) {
-      console.tron.log(error);
       toast.error(`error: ${error}`);
     }
   }
@@ -188,23 +188,33 @@ export default function Suport() {
         ariaHideApp={false}
       >
         <ModalContainer>
-          <ModalContent>
-            <strong>
-              PERGUNTA DO ALUNO:{' '}
-              <span>{modalHelpOrder ? modalHelpOrder.student.name : null}</span>
-            </strong>
-            <span> {modalHelpOrder ? modalHelpOrder.question : null}</span>
-          </ModalContent>
           <ModalForm
             initialData={modalHelpOrder}
             schema={schema}
             onSubmit={handleSubmit}
           >
             <label>
+              <strong>
+                PERGUNTA DO ALUNO:{' '}
+                <span>
+                  {modalHelpOrder ? modalHelpOrder.student.name : null}
+                </span>
+              </strong>
+
+              <ModalInput
+                multiline
+                name="question"
+                readOnly
+                onChange={e => setAnswer(e.target.value)}
+                placeholder="Resposta..."
+              />
+            </label>
+            <label>
               <strong>SUA RESPOSTA</strong>
 
               <ModalInput
-                multiline name="answer"
+                multiline
+                name="answer"
                 onChange={e => setAnswer(e.target.value)}
                 placeholder="Resposta..."
               />
