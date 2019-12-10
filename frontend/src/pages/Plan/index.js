@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { signOut } from '~/store/modules/auth/actions';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import {
@@ -8,6 +7,7 @@ import {
   MdKeyboardArrowRight,
   MdKeyboardArrowLeft
 } from 'react-icons/md';
+import { signOut } from '~/store/modules/auth/actions';
 
 import { formatPrice } from '~/util/format';
 import api from '~/services/api';
@@ -36,7 +36,9 @@ export default function Plan() {
       const data = response.data.map(plan => ({
         ...plan,
         durationFormatted:
-          plan.duration === 1 ? `${plan.duration} mês` : `${plan.duration} meses`,
+          plan.duration === 1
+            ? `${plan.duration} mês`
+            : `${plan.duration} meses`,
         priceFormatted: formatPrice(plan.price)
       }));
       setPlans(data);
@@ -44,7 +46,7 @@ export default function Plan() {
       if (e.response.data.error === 'Token invalid') {
         dispatch(signOut());
       } else {
-        toast.error(e.response.data.error)
+        toast.error(e.response.data.error);
       }
     }
   }

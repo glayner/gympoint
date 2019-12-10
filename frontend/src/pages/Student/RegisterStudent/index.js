@@ -1,11 +1,11 @@
 import React from 'react';
 import { useDispatch } from 'react-redux';
-import { signOut } from '~/store/modules/auth/actions';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { MdCheck, MdKeyboardArrowLeft } from 'react-icons/md';
 import { Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
+import { signOut } from '~/store/modules/auth/actions';
 
 import api from '~/services/api';
 import history from '~/services/history';

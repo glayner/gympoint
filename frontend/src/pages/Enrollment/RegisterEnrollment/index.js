@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
-import { signOut } from '~/store/modules/auth/actions';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import {
@@ -9,7 +8,7 @@ import {
   setHours,
   setMinutes,
   setSeconds,
-  endOfSecond,
+  endOfSecond
 } from 'date-fns';
 
 import pt from 'date-fns/locale/pt-BR';
@@ -17,6 +16,7 @@ import pt from 'date-fns/locale/pt-BR';
 import { MdCheck, MdKeyboardArrowLeft } from 'react-icons/md';
 import { Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
+import { signOut } from '~/store/modules/auth/actions';
 
 import { formatPrice } from '~/util/format';
 import api from '~/services/api';
@@ -71,7 +71,6 @@ export default function RegisterEnrollment() {
         );
 
       setPlans(response);
-
     } catch (e) {
       if (e.response.data.error === 'Token invalid') {
         dispatch(signOut());
@@ -115,13 +114,13 @@ export default function RegisterEnrollment() {
     try {
       const dateNow = new Date();
 
-      const dateNowComp = `${dateNow.getDate()}/${
-        dateNow.getMonth()+1}/${dateNow.getFullYear()}`;
-      const dateFormComp = `${data.start_date.getDate()}/${
-        data.start_date.getMonth()+1}/${data.start_date.getFullYear()}`;
-      let startDateNow
+      const dateNowComp = `${dateNow.getDate()}/${dateNow.getMonth() +
+        1}/${dateNow.getFullYear()}`;
+      const dateFormComp = `${data.start_date.getDate()}/${data.start_date.getMonth() +
+        1}/${data.start_date.getFullYear()}`;
+      let startDateNow;
 
-      if(dateNowComp === dateFormComp){
+      if (dateNowComp === dateFormComp) {
         startDateNow = endOfSecond(
           setSeconds(
             setMinutes(
@@ -131,8 +130,8 @@ export default function RegisterEnrollment() {
             dateNow.getSeconds()
           )
         );
-      }else {
-        startDateNow = data.start_date
+      } else {
+        startDateNow = data.start_date;
       }
 
       await api.post('enrollments', {

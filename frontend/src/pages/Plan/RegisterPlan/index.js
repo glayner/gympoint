@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { signOut } from '~/store/modules/auth/actions';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import { MdCheck, MdKeyboardArrowLeft } from 'react-icons/md';
 import { Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
+import { signOut } from '~/store/modules/auth/actions';
 
 import { formatPrice } from '~/util/format';
 import api from '~/services/api';
@@ -20,10 +20,11 @@ const schema = Yup.object().shape({
   duration: Yup.number()
     .integer('somente numeros inteiros')
     .typeError('Valor inválido')
+    .positive('não é permitido valores negativos')
     .required(),
   price: Yup.number()
     .typeError('Valor inválido')
-    .required()
+    .required('Preço é obrigatório')
 });
 
 export default function RegisterPlan() {

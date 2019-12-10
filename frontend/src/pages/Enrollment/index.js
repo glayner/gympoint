@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { signOut } from '~/store/modules/auth/actions';
 import { toast } from 'react-toastify';
 import { parseISO, format } from 'date-fns';
 import pt from 'date-fns/locale/pt';
@@ -11,13 +10,14 @@ import {
   MdKeyboardArrowRight,
   MdKeyboardArrowLeft
 } from 'react-icons/md';
+import { signOut } from '~/store/modules/auth/actions';
 
 import api from '~/services/api';
 
 import { Container, Cover, Title, Content, Pagination } from '~/styles/default';
 
 export default function Enrollment() {
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const [enrollments, setEnrollments] = useState([]);
   const [page, setPage] = useState(1);
@@ -26,41 +26,40 @@ const dispatch = useDispatch();
 
   async function loadEnrollment() {
     try {
-    const response = await api.get('enrollments', {
-      params: { page, per_page: 10 }
-    });
-    if (page === 1) {
-      setPrevDisable(true);
-    }
-    if (response.data.length < 10) {
-      setNextDisable(true);
-    }
-    const data = response.data.map(enrollment => ({
-      ...enrollment,
-      startDateFormatted: format(
-        parseISO(enrollment.start_date),
-        "dd 'de' MMMM 'de' yyyy",
-        {
-          locale: pt
-        }
-      ),
-      endDateFormatted: format(
-        parseISO(enrollment.end_date),
-        "dd 'de' MMMM 'de' yyyy",
-        {
-          locale: pt
-        }
-      )
-    }));
-    setEnrollments(data);
-
-  } catch (e) {
-    if(e.response.data.error === 'Token invalid'){
+      const response = await api.get('enrollments', {
+        params: { page, per_page: 10 }
+      });
+      if (page === 1) {
+        setPrevDisable(true);
+      }
+      if (response.data.length < 10) {
+        setNextDisable(true);
+      }
+      const data = response.data.map(enrollment => ({
+        ...enrollment,
+        startDateFormatted: format(
+          parseISO(enrollment.start_date),
+          "dd 'de' MMMM 'de' yyyy",
+          {
+            locale: pt
+          }
+        ),
+        endDateFormatted: format(
+          parseISO(enrollment.end_date),
+          "dd 'de' MMMM 'de' yyyy",
+          {
+            locale: pt
+          }
+        )
+      }));
+      setEnrollments(data);
+    } catch (e) {
+      if (e.response.data.error === 'Token invalid') {
         dispatch(signOut());
-    }else{
-      toast.error(e.response.data.error)
+      } else {
+        toast.error(e.response.data.error);
+      }
     }
-  }
   }
 
   useEffect(() => {
@@ -78,7 +77,6 @@ const dispatch = useDispatch();
       }
     } catch (e) {
       toast.error(e.response.data.error);
-
     }
   }
 

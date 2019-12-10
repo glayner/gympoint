@@ -46,7 +46,7 @@ export default function Header() {
           </Link>
         </nav>
         <aside>
-          <span>{profile ? profile.name: ''}</span>
+          <span>{profile ? profile.name : ''}</span>
           <button type="button" onClick={handleSignOut}>
             sair do sistema
           </button>

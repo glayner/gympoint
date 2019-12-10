@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { signOut } from '~/store/modules/auth/actions';
 import { toast } from 'react-toastify';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { MdCheck, MdKeyboardArrowLeft } from 'react-icons/md';
 import { Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
+import { signOut } from '~/store/modules/auth/actions';
 
 import { formatPrice } from '~/util/format';
 import api from '~/services/api';
@@ -30,7 +30,7 @@ const schema = Yup.object().shape({
 });
 
 export default function ManagePlan({ match }) {
-const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
   const { id } = match.params;
   const [price, setPrice] = useState(null);
@@ -53,11 +53,11 @@ const dispatch = useDispatch();
         setPrice(data.price);
         setDuration(data.duration);
       } catch (e) {
-         if (e.response.data.error === 'Token invalid') {
-        dispatch(signOut());
-      } else {
-        toast.error(e.response.data.error);
-      }
+        if (e.response.data.error === 'Token invalid') {
+          dispatch(signOut());
+        } else {
+          toast.error(e.response.data.error);
+        }
       }
     }
     loadManagePlan();
@@ -71,7 +71,7 @@ const dispatch = useDispatch();
       toast.success('successfully edited');
       history.push('/plan');
     } catch (e) {
-       if (e.response.data.error === 'Token invalid') {
+      if (e.response.data.error === 'Token invalid') {
         dispatch(signOut());
       } else {
         toast.error(e.response.data.error);

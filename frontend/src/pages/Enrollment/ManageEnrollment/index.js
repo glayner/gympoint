@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
-import { signOut } from '~/store/modules/auth/actions';
 import PropTypes from 'prop-types';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
@@ -12,13 +11,14 @@ import {
   setSeconds,
   endOfSecond,
   parseISO,
-  startOfDay,
+  startOfDay
 } from 'date-fns';
 
 import pt from 'date-fns/locale/pt-BR';
 
 import { MdCheck, MdKeyboardArrowLeft } from 'react-icons/md';
 import { Input } from '@rocketseat/unform';
+import { signOut } from '~/store/modules/auth/actions';
 
 import { formatPrice } from '~/util/format';
 import api from '~/services/api';
@@ -46,7 +46,6 @@ export default function ManageEnrollment({ match }) {
   useEffect(() => {
     async function loadManageEnrollment() {
       try {
-
         const enrollment = await api
           .get('enrollments', {
             params: { page: 1, per_page: 100 }
@@ -82,7 +81,6 @@ export default function ManageEnrollment({ match }) {
         }
 
         setPlans(loadPlans);
-
       } catch (e) {
         if (e.response.data.error === 'Token invalid') {
           dispatch(signOut());
@@ -135,13 +133,13 @@ export default function ManageEnrollment({ match }) {
     try {
       const dateNow = new Date();
 
-      const dateNowComp = `${dateNow.getDate()}/${
-        dateNow.getMonth()+1}/${dateNow.getFullYear()}`;
-      const dateFormComp = `${data.start_date.getDate()}/${
-        data.start_date.getMonth()+1}/${data.start_date.getFullYear()}`;
-      let startDateNow
+      const dateNowComp = `${dateNow.getDate()}/${dateNow.getMonth() +
+        1}/${dateNow.getFullYear()}`;
+      const dateFormComp = `${data.start_date.getDate()}/${data.start_date.getMonth() +
+        1}/${data.start_date.getFullYear()}`;
+      let startDateNow;
 
-      if(dateNowComp === dateFormComp){
+      if (dateNowComp === dateFormComp) {
         startDateNow = endOfSecond(
           setSeconds(
             setMinutes(
@@ -151,8 +149,8 @@ export default function ManageEnrollment({ match }) {
             dateNow.getSeconds()
           )
         );
-      }else {
-        startDateNow = startOfDay(data.start_date)
+      } else {
+        startDateNow = startOfDay(data.start_date);
       }
 
       let newData = {};

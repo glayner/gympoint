@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { signOut } from '~/store/modules/auth/actions';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import {
@@ -10,6 +9,7 @@ import {
   MdKeyboardArrowRight
 } from 'react-icons/md';
 import { Form, Input } from '@rocketseat/unform';
+import { signOut } from '~/store/modules/auth/actions';
 
 import api from '~/services/api';
 import { Container, Cover, Title, Content, Pagination } from '~/styles/default';
@@ -41,7 +41,7 @@ export default function Student() {
       if (e.response.data.error === 'Token invalid') {
         dispatch(signOut());
       } else {
-        toast.error(e.response.data.error)
+        toast.error(e.response.data.error);
       }
     }
   }
@@ -49,8 +49,6 @@ export default function Student() {
   useEffect(() => {
     loadStudents();
   }, [page]); // eslint-disable-line
-
-
 
   async function handleDelete(id) {
     try {
@@ -91,7 +89,11 @@ export default function Student() {
               <button type="submit">
                 <MdSearch size={16} color="#999" />
               </button>
-              <Input name="nameSearch"  onChange={e => setName(e.target.value)} placeholder="Buscar Aluno" />
+              <Input
+                name="nameSearch"
+                onChange={e => setName(e.target.value)}
+                placeholder="Buscar Aluno"
+              />
             </Form>
           </Search>
         </Title>

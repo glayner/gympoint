@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { signOut } from '~/store/modules/auth/actions';
 import { toast } from 'react-toastify';
 import { Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import { MdCheck, MdKeyboardArrowLeft } from 'react-icons/md';
 import { Input } from '@rocketseat/unform';
 import * as Yup from 'yup';
+import { signOut } from '~/store/modules/auth/actions';
 
 import api from '~/services/api';
 import history from '~/services/history';
@@ -40,7 +40,6 @@ export default function ManageStudent({ match }) {
   useEffect(() => {
     async function loadManageStudent() {
       try {
-
         const response = await api.get('students', {
           params: { name, page: 1, per_page: 100 }
         });
@@ -48,7 +47,6 @@ export default function ManageStudent({ match }) {
         setStudent({
           ...data
         });
-
       } catch (e) {
         if (e.response.data.error === 'Token invalid') {
           dispatch(signOut());
