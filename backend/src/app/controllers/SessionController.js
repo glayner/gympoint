@@ -45,7 +45,7 @@ class SessionController {
     });
   }
 
-  async index(req, res){
+  async index(req, res) {
     const student = await Student.findByPk(req.params.id);
     // check this student there is
     if (!student) {
