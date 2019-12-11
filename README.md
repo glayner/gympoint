@@ -42,7 +42,7 @@ git clone https://github.com/glayner/gympoint.git
 cd gympoint/backend
 
 #instalar os pacotes e dependencias
-yarn
+yarn install
 
 ```
 Faça uma cópia do arquivo .env.example, renomeie para .env e altere as variáveis de acordo com o seu ambiente.
@@ -71,7 +71,7 @@ yarn queue
 cd gympoint/frontend
 
 #instalar os pacotes e dependencias
-yarn
+yarn install
 
 # inicializar a aplicação web
 yarn start
@@ -87,7 +87,7 @@ yarn start
 cd gympoint/mobile
 
 #instalar os pacotes e dependencias
-yarn
+yarn install
 ```
 alterar o baseURL em gympoint/mobile/src/services/api.js colocando o ip local como no .env do back-end
 ```bash
