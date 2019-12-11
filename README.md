@@ -95,6 +95,7 @@ alterar o baseURL em gympoint/mobile/src/services/api.js colocando o ip local co
 react-native run-android
 ```
 obs: caso não inicie automaticamente rotar "react-native start" e se ficar só uma tela branca rodar o "react-native run-android" novamente em outro terminal enquanto o start está rodando.
+
 ---
 ## :memo: Licença
 
