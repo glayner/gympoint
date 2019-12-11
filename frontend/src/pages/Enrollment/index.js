@@ -117,9 +117,7 @@ export default function Enrollment() {
             <tbody>
               {enrollments.map(enrollment => (
                 <tr key={enrollment.id}>
-                  <td>
-                    {enrollment.student ? enrollment.student.name : 'deleted'}
-                  </td>
+                  <td>{enrollment.student.name}</td>
                   <td>{enrollment.plan ? enrollment.plan.title : 'deleted'}</td>
                   <td>{enrollment.startDateFormatted}</td>
                   <td>{enrollment.endDateFormatted}</td>
