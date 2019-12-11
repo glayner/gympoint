@@ -9,9 +9,9 @@ module.exports = {
       },
       student_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'students', key: 'id' }, // chave estrangeira
-        onUpdate: 'CASCADE', // o que acontece caso o arquivo seja modificado
-        onDelete: 'SET NULL', // ou deletado
+        references: { model: 'students', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
         allowNull: true,
       },
       created_at: {

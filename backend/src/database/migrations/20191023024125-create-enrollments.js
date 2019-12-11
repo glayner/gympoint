@@ -17,17 +17,16 @@ module.exports = {
       },
       student_id: {
         type: Sequelize.INTEGER,
-        references: { model: 'students', key: 'id' }, // chave estrangeira
-        onUpdate: 'CASCADE', // o que acontece caso o arquivo seja modificado
-        onDelete: 'CASCADE', // ou deletado
+        references: { model: 'students', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'CASCADE',
         allowNull: true,
       },
       plan_id: {
-        // provedor de serviço
         type: Sequelize.INTEGER,
-        references: { model: 'plans', key: 'id' }, // chave estrangeira
-        onUpdate: 'CASCADE', // o que acontece caso o arquivo seja modificado
-        onDelete: 'SET NULL', // ou deletado
+        references: { model: 'plans', key: 'id' },
+        onUpdate: 'CASCADE',
+        onDelete: 'SET NULL',
         allowNull: true,
       },
       price: {
